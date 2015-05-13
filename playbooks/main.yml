@@ -1,0 +1,36 @@
+---
+- hosts: all
+  vars:
+    var: wat
+  handlers:
+    - name: launch registrator container
+      docker:
+        command="{{registry_uri}}"
+        image=gliderlabs/registrator
+        state=reloaded
+        restart_policy=always
+        detach=true
+        volumes=/var/run/docker.sock:/tmp/docker.sock
+        hostname="{{ lookup('env','$HOSTNAME') }}"
+        name="registrator-{{disco}}"
+  tasks:
+    - name: consul service info changed
+      include: service-info-changed.yml
+      tags:
+        - service-info-relation-changed
+
+    - name: docker events changed
+      include: docker-events-changed.yml
+      tags:
+        - docker-event-relationship-changed
+
+    - name: upgrade or install
+      include: install-or-upgrade.yml
+      tags:
+        - upgrade-charm
+        - install
+
+    - name: config changed
+      include: config-changed.yml
+      tags:
+        - config-changed

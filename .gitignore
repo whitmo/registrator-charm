@@ -3,3 +3,5 @@
 *.pyc
 /.tox/
 /AnsibleCharm.egg-info/
+/.juju-persistent-config
+/src/

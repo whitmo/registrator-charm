@@ -1,1 +1,17 @@
 ---
+name: registrator
+summary: Deploys Registrator, the service discovery bridge
+description: |
+  Registrator registers running docker containers with a discovery
+  service.
+subordinate: true
+tags:
+  - ops
+  - application_development
+provides:
+  service-info:
+    interface: consul
+requires:
+  docker-events:
+    interface: docker-socket
+    scope: container
