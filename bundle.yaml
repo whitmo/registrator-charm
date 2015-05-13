@@ -29,4 +29,4 @@ consul-stack:
     - ["heka-sub:heka_out", "heka-hub:heka_in"]
     - ["heka-sub:heka_out", "heka-hub:heka_in"]
     - ["registrator", "docker"]
-    - ["registrator", "consul"]
+    - ["registrator:consul-api", "consul:api"]
