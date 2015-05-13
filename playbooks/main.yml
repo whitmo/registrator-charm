@@ -3,7 +3,7 @@
   vars:
     var: wat
   handlers:
-    - name: launch registrator container
+    - name: start registrator container
       docker:
         command="{{registry_uri}}"
         image=gliderlabs/registrator
@@ -14,10 +14,10 @@
         hostname="{{ lookup('env','$HOSTNAME') }}"
         name="registrator-{{disco}}"
   tasks:
-    - name: consul service info changed
-      include: service-info-changed.yml
+    - name: consul api changed
+      include: consul-api-changed.yml
       tags:
-        - service-info-relation-changed
+        - consul-api-relation-changed
 
     - name: docker events changed
       include: docker-events-changed.yml

@@ -9,9 +9,13 @@ tags:
   - ops
   - application_development
 provides:
-  service-info:
+  service-info-proxy:
     interface: consul
 requires:
+  consul-api:
+    interface: consul
+  etcd-api:
+    interface: etcd
   docker-events:
     interface: docker-socket
     scope: container
