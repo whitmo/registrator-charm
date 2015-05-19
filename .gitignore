@@ -5,3 +5,4 @@
 /AnsibleCharm.egg-info/
 /.juju-persistent-config
 /src/
+/backends.txt

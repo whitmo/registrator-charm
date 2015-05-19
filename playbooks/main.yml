@@ -5,7 +5,7 @@
   handlers:
     - name: start registrator container
       docker:
-        command="{{registry_uri}}"
+        command="{{registry_uri}} -ip"
         image=gliderlabs/registrator
         state=reloaded
         restart_policy=always

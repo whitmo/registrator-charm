@@ -2,4 +2,4 @@
 -e git+https://github.com/whitmo/ansible-charm.git#egg=AnsibleCharm
 ansible
 path.py
-docker-py
+docker-py==1.1.0
