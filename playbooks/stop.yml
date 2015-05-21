@@ -1,0 +1,11 @@
+---
+- name: start registrator container
+  docker:
+    command="{{registry_uri}} -ip"
+    image=gliderlabs/registrator
+    state=reloaded
+    restart_policy=always
+    detach=true
+    volumes=/var/run/docker.sock:/tmp/docker.sock
+    hostname="{{ lookup('env','$HOSTNAME') }}"
+    name="registrator-{{disco}}"

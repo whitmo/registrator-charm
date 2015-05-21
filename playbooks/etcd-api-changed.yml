@@ -1,0 +1,8 @@
+---
+- debug: msg="{{current_relation}}"
+
+- set_fact:
+    disco: etcd
+    registry_uri: "etcd://{{etcd_api__private_address}}:{{etcd_api__port}}"
+
+- include: backend-record.yml
