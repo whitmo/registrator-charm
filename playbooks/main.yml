@@ -34,3 +34,8 @@
       include: config-changed.yml
       tags:
         - config-changed
+
+    - name: stop
+      include: stop.yml
+      tags:
+        - stop
