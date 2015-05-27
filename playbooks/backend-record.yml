@@ -1,9 +1,9 @@
 ---
 - name: record backend uri
   lineinfile:
-      dest={{charm_dir}}/backends.txt
+      dest="{{ charm_dir }}/backends.txt"
       create=yes
       state=present
-      line={{registry_uri}}
+      line="{{ disco }}"
   notify:
      - start registrator container
