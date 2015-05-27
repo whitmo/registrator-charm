@@ -1,11 +1,23 @@
 ---
-- name: start registrator container
+- debug: msg="stop"
+
+- set_fact:
+    backends: "cat {{charm_dir}}/backends.txt"
+
+- debug: msg="{{ item }}"
+  with_lines: "{{ backends }}"
+
+- name: stop registrator containers
   docker:
-    command="{{registry_uri}} -ip"
     image=gliderlabs/registrator
-    state=reloaded
-    restart_policy=always
-    detach=true
-    volumes=/var/run/docker.sock:/tmp/docker.sock
-    hostname="{{ lookup('env','$HOSTNAME') }}"
-    name="registrator-{{disco}}"
+    state=absent
+    name="registrator-{{ item }}"
+  with_lines: "{{ backends }}"
+
+- name: erase backend
+  lineinfile:
+      dest="{{ charm_dir }}/backends.txt"
+      create=yes
+      state=absent
+      line="{{ item }}"
+  with_lines: "{{ backends }}"
