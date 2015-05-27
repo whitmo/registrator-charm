@@ -1,10 +1,10 @@
 consul-stack:
   series: trusty
   services:
-    consul:
-      charm: "local:trusty/consul"
+    etcd:
+      charm: "local:trusty/etcd"
       num_units: 3
-      to: [0, docker]
+      to: [0, docker, docker]
     registrator:
       charm: "local:trusty/registrator"
     docker:
@@ -24,9 +24,14 @@ consul-stack:
         rstout: true
         jujud_logs: true
         juju_agent: true
+    consul:
+      charm: "local:trusty/consul"
+      num_units: 3
+      to: [docker, docker, 0]
   relations:
     - ["heka-sub:docker_logging", "docker:logging"]
     - ["heka-sub:heka_out", "heka-hub:heka_in"]
     - ["heka-sub:heka_out", "heka-hub:heka_in"]
     - ["registrator", "docker"]
     - ["registrator:consul-api", "consul:api"]
+    - ["registrator:etcd-api", "etcd:client"]
