@@ -1,7 +1,5 @@
 ---
 - hosts: all
-  vars:
-    var: wat
   handlers:
     - name: start registrator container
       docker:
@@ -18,6 +16,11 @@
       include: consul-api-changed.yml
       tags:
         - consul-api-relation-changed
+
+    - name: etcd api changed
+      include: etcd-api-changed.yml
+      tags:
+        - etcd-api-relation-changed
 
     - name: docker events changed
       include: docker-events-changed.yml
