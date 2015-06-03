@@ -3,6 +3,6 @@
 
 - set_fact:
     disco: etcd
-    registry_uri: "etcd://{{etcd_api__private_address}}:{{etcd_api__port}}/services"
+    registry_uri: "etcd://{{ etcd_api__private_address }}:{{ etcd_api__port }}/{{ etcd_key_path }}"
 
 - include: backend-record.yml

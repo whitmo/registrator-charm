@@ -1,6 +1,9 @@
 consul-stack:
   series: trusty
   services:
+    nginx:
+      charm: "local:trusty/nginx-disco"
+      to: docker
     etcd:
       charm: "local:trusty/etcd"
       num_units: 3
@@ -25,9 +28,9 @@ consul-stack:
         jujud_logs: true
         juju_agent: true
     consul:
-      charm: "local:trusty/consul"
-      num_units: 3
-      to: [docker, docker, 0]
+       charm: "local:trusty/consul"
+       num_units: 3
+       to: [docker, docker, 0]
   relations:
     - ["heka-sub:docker_logging", "docker:logging"]
     - ["heka-sub:heka_out", "heka-hub:heka_in"]

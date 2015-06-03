@@ -1,2 +1,8 @@
 ---
-options: null
+options:
+  etcd_key_path:
+    type: string
+    default: "services"
+    description: |
+      Path to the key space container for services registered by this
+      charm.
