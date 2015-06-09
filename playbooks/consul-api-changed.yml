@@ -4,6 +4,8 @@
 - set_fact:
     disco: consul
     registry_uri: "consul://{{consul_api__address}}:{{consul_api__port}}"
-    when: consul_api__address is defined and consul_api__port is defined
+  when: consul_api__address is defined and consul_api__port is defined
 
 - include: backend-record.yml
+  when: consul_api__address is defined and consul_api__port is defined
+
